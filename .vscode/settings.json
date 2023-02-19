@@ -1,0 +1,22 @@
+{
+    "editor.codeActionsOnSave": {
+    
+    },
+    "workbench.colorCustomizations": {
+    
+    },
+    "auto-rename-tag.activationOnLanguage": [
+
+        "*"
+    ],
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "editor.guides.bracketPairs": true,
+    "editor.guides.bracketPairsHorizontal": true,
+    "editor.language.brackets": [
+    []
+    ],
+    "editor.language.colorizedBracketPairs": [
+    []
+    ],
+    "xml.format.closingBracketNewLine": true
+}
