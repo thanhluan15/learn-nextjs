@@ -1,15 +1,33 @@
-import NextAuth from "next-auth/next";
-import Auth0Provider from "next-auth/providers"
-import GitHubProvider from "next-auth/providers/github"
-import GoogleProvider from "next-auth/providers/google"
-import DiscordProvider from "next-auth/providers"
+import NextAuth, { NextAuthOptions } from "next-auth";
+import Auth0Provider from "next-auth/providers";
+import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 
+export const authOptions: NextAuthOptions = {
+  providers: [
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID as string,
+      clientSecret: process.env.GITHUB_SECRET as string,
+    }),
+    GoogleProvider({
+      clientId: "",
+      clientSecret: "",
+    }),
+  ],
+  theme: {
+    colorScheme: "dark",
+  },
+  callbacks: {
+    async jwt({ token, account }) {
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
+    async session({ session, token, user }) {
+      return session;
+    },
+  },
+};
 
-export default NextAuth ({
-    providers: [
-        GitHubProvider({
-          clientId: "a126ad83fd760325a0fb",
-          clientSecret: "1107c90fe91dca1d12a6d6a0adb17c15fc1c07f0"
-        })
-      ]
-})
+export default NextAuth(authOptions);
