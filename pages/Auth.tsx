@@ -1,6 +1,7 @@
 import React from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "./components/Button";
+import Github from "next-auth/providers/github";
 
 function Header() {
   const { data: session } = useSession();
@@ -8,14 +9,16 @@ function Header() {
   if (session) {
     return (
       <div className="w-full flex h-[600px] justify-center items-center gap-2">
-        <Button children={"Sign out"} onClick={signOut}></Button>
+        <Button onClick={() => signOut()}>Sign out</Button>
       </div>
     );
   } else {
     return (
       <div className="w-full flex h-[600px] justify-center items-center gap-2">
-        <Button children="Log in" onClick={signIn}></Button>
-        <Button children="Sign up"></Button>
+        <Button onClick={() => signIn("github", { callbackUrl: "/admin" })}>
+          Log in
+        </Button>
+        <Button>Sign up</Button>
       </div>
     );
   }
